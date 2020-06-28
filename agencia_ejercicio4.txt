@@ -11,12 +11,15 @@ alojamiento(londres,camping,20).
 alojamiento(tunez,hotel,40).
 alojamiento(tunez,hostal,20).
 alojamiento(tunez,camping,5).
+
 multiplicar(P,X,Y):- P is X*Y.
 sumar(S,X,Y):- S is X+Y.
 menor(X,Y):- X<Y.
+
 %Expresar la relación viaje(C,S,H,P) que se interpreta por: el viaje a la ciudad C durante S semanas con estancia en H cuesta P pesos.
 viaje(C,S,H,P):-transporte(C, VT), alojamiento(C, H, VA), multiplicar(M, S, VA), sumar(P, M, VT).
 %viaje(C, 1, H, P).
+
 %Completar con viajeeconomico(C,S,H,P,Pmax) que expresa que el costo P es menor quePmax pesos.
 viajeeconomico(C,S,H,P,Pmax):-viaje(C,S,H,P), menor(Pmax, P). 
 %viajeeconomico(C,1,H,P,30).
