@@ -7,7 +7,23 @@
 % \+ (alias not())
 % ! (corte de control)
 
-%Ejercicio
+%Comparacion y unificacion
+% =  -> Unificacion, W vale Z.
+% == -> Es verdadero si son iguales W y Z son iguales.
+% \== -> Distinto
+
+%Comparaciones aritmeticas
+% > mayor
+% >= mayor igual (carita triste)
+% < menor
+% =< menor igual (carita triste)
+% =\= distintos
+% =:= expresion igual a otra
+% is
+% + unario
+% - unario
+ 
+%Ejercicio-Parentescos
 padre_de(carlos, luis).
 padre_de(eduardo, luis).
 padre_de(franco, carlos).
@@ -16,7 +32,6 @@ padre_de(julian, carlos).
 madre_de(franco, maria).
 madre_de(sofia, susana).
 madre_de(julian, susana).
-
 %hijo_de(Padre, Hijo):-padre_de(Hijo, Padre);madre_de(Hijo, Padre).
 hijo_de(X, Y):-padre_de(Y, X).
 hijo_de(X, Y):-madre_de(Y, X).
@@ -24,7 +39,20 @@ abuelo_de(X, Y):-hijo_de(Y, Z), hijo_de(Z, X).
 medio_hermano_de(X, Y):-hijo_de(Z, X), hijo_de(Z, Y), X \== Y.
 hermano_de(X, Y):-madre_de(X, M), madre_de(Y, M), padre_de(X, P), padre_de(Y, P), X \== Y.
 
-%Comparacion y unificacion
-% =  -> Unificacion, W vale Z.
-% == -> Es verdadero si son iguales W y Z son iguales.
-% \== -> Distinto
+%Ejercicio-Paises limítrofes
+limita(argentina, brasil).
+limita(argentina, uruguay).
+limita(argentina, paraguay).
+limita(argentina, bolivia).
+limita(argentina, chile).
+limita(chile, peru).
+limita(bolivia, peru).
+limita(bolivia, brasil).
+limita(bolivia, paraguay).
+limita(paraguay, brasil).
+limita(brasil, peru).
+limita(brasil, colombia).
+limita(brasil, venezuela).
+limita(brasil, guyana).
+limita_con(X, Y):-(limita(X, Y) ; limita(Y, X)) , X\==Y.
+translimita_con(X, Y):-limita_con(X, Z), limita_con(Y, Z), \+ limita(X, Y), X\==Y.

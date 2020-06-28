@@ -1,0 +1,24 @@
+%Menu de comidas
+entrada(paella).
+entrada(gazpacho).
+entrada(consomé).
+carne(filete_de_cerdo).
+carne(pollo_asado).
+pescado(trucha).
+pescado(bacalao).
+postre(flan).
+postre(helado).
+postre(pastel).
+bebida(vino).
+bebida(cerveza).
+bebida(agua_mineral).
+
+%¿Cuáles son los menús que ofrece el restaurante?
+plato_principal(X):-carne(X); pescado(X).
+menu(X, Y, Z):-entrada(X), plato_principal(Y), postre(Z).
+%¿Cuáles son los menús que tienen Consomé en las entradas?
+menu_con_consome(X, Y, Z):-X=consomé, plato_principal(Y), postre(Z).
+%¿Cuáles son los menús que no contienen flan como postre?
+menu_sin_postre_flan(X, Y, Z):-entrada(X), plato_principal(Y), postre(Z), Z \== flan.
+%Completar el programa “menú” de manera que una comida esté formada también por la elección de una bebida, a elegir entre vino, cerveza o agua mineral.
+menu_con_bebida(X, Y, Z, W):- menu(X, Y, Z), bebida(W).

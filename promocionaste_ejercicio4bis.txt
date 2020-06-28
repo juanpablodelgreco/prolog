@@ -1,0 +1,27 @@
+%¿Promocionaste?
+%Se dispone de un listado con los resultados de los parciales de los alumnos del curso de Programación Avanzada, organizado de la siguiente manera:
+%Versión 1: Se dispone de las notas de ambos parciales para todos los alumnos.
+parcial1(jorge,9).
+parcial1(emanuel,2).
+parcial1(rocio,5).
+parcial1(carlos,1).
+parcial2(jorge,7).
+parcial2(emanuel,3).
+parcial2(rocio,6).
+%El listado de los alumnos que promocionan la materia, indicando el nombre y la nota final (promedio de los dos parciales), para cada uno.
+promocionan(X, N):-parcial1(X, N1), parcial2(X, N2), N1>=7, N2>=7, N is (N1+N2)/2.
+%El listado de los alumnos que obtendrán la cursada. 
+cursada(X, N):-parcial1(X, N1), parcial2(X, N2), (N1>=4 , N1<7), (N2>=4 , N2<7), N is (N1+N2)/2.
+%El listado de los alumnos que recursan la materia.
+recursa(X, N):-parcial1(X, N1), parcial2(X, N2), N1<4, N2<4, N is (N1+N2)/2.
+%A fin de entregar la medalla al mérito, encontrar de aquellos que promocionan, el o los alumnos con mayor nota final. 
+producto_cartesiano(X, Y, W, Z):-promocionan(X, Y), promocionan(W, Z).
+seleccion(X, Y, W, Z):-producto_cartesiano(X, Y, W, Z), Y<Z.
+proyeccion(X, Y):-seleccion(X, Y, _, _).
+maximo(X, Y):-promocionan(X, Y), not(proyeccion(X, Y)).
+nota_maxima(X):-promocionan(X, Y), maximo(X, Y).
+%Versión 2: El listado se compone de al menos una nota para cada alumno. En caso de que algún alumno adeude uno de los parciales, su condición es ausente.
+%No se toman en cuenta quienes no dieron ninguno de los  parciales. 
+ausentes(Nombre):-parcial1(Nombre,_),not(parcial2(Nombre,_)).
+ausentes(Nombre):-not(parcial1(Nombre,_)),parcial2(Nombre,_).
+ausentes(Nombre):-not(parcial1(Nombre,_)),not(parcial2(Nombre,_)).
