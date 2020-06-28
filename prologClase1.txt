@@ -1,0 +1,30 @@
+% head:-body.
+%Esto se lee como "head" es verdadero si "body" es verdadero"
+
+%Predicados de control
+% , (and)
+% ; (or) (alias |)
+% \+ (alias not())
+% ! (corte de control)
+
+%Ejercicio
+padre_de(carlos, luis).
+padre_de(eduardo, luis).
+padre_de(franco, carlos).
+padre_de(sofia, carlos).
+padre_de(julian, carlos).
+madre_de(franco, maria).
+madre_de(sofia, susana).
+madre_de(julian, susana).
+
+%hijo_de(Padre, Hijo):-padre_de(Hijo, Padre);madre_de(Hijo, Padre).
+hijo_de(X, Y):-padre_de(Y, X).
+hijo_de(X, Y):-madre_de(Y, X).
+abuelo_de(X, Y):-hijo_de(Y, Z), hijo_de(Z, X).
+medio_hermano_de(X, Y):-hijo_de(Z, X), hijo_de(Z, Y), X \== Y.
+hermano_de(X, Y):-madre_de(X, M), madre_de(Y, M), padre_de(X, P), padre_de(Y, P), X \== Y.
+
+%Comparacion y unificacion
+% =  -> Unificacion, W vale Z.
+% == -> Es verdadero si son iguales W y Z son iguales.
+% \== -> Distinto
