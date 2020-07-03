@@ -1,0 +1,30 @@
+%Como obtener maximos y minimos
+num(1).
+num(2).
+num(3).
+num(4).
+num(5).
+num(0).
+
+%Maximo
+%Producto cartesiano
+prod_cart(X, Y):-num(X), num(Y).
+
+%Seleccion
+seleccion(X, Y):-prod_cart(X, Y), X<Y.
+
+%Proyeccion
+proyeccion(X):-seleccion(X, _).
+
+%Maximo->Número que no se encuentre en proyeccion.
+max(X):-num(X), \+ proyeccion(X).
+
+%Otra forma de obtener un maximo
+todosMenosMax(X):-num(X), num(Y), X<Y.
+max2(X):-num(X), not(todosMenosMax(X)).
+
+%Minimo
+seleccion2(X, Y):-prod_cart(X, Y), X>Y.
+proyeccion2(X):-seleccion2(X, _).
+min(X):-num(X), \+ proyeccion2(X).
+

@@ -1,0 +1,27 @@
+%Como obtener maximos y minimos
+num(alumno1,1).
+num(alumno2,2).
+num(alumno3,3).
+num(alumno4,4).
+num(alumno5,5).
+num(alumno0,0).
+num(alumno5B,5).
+
+%Maximo
+%Producto cartesiano
+prod_cart(X, Y):-num(_, X), num(_, Y).
+
+%Seleccion
+seleccion(X, Y):-prod_cart(X, Y), X<Y.
+
+%Proyeccion
+proyeccion(X):-seleccion(X, _).
+
+%Maximo->Número que no se encuentre en proyeccion.
+max(Alumno, X):-num(Alumno, X), \+ proyeccion(X).
+
+%Minimo
+seleccion2(X, Y):-prod_cart(X, Y), X>Y.
+proyeccion2(X):-seleccion2(X, _).
+min(Alumno, X):-num(Alumno, X), \+ proyeccion2(X).
+
