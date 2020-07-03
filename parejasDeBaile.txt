@@ -1,0 +1,11 @@
+%Parejas de baile
+hombre(alberto, cumbia, salsa).
+hombre(jorge, cuarteto, tango).
+hombre(fabian, cumbia, rock).
+mujer(ana, salsa, merengue).
+mujer(florencia, rock, merengue).
+mujer(gisella, cumbia, tango).
+
+hombre1(X, Y):-hombre(X, Y, _);hombre(X, _, Y).
+mujer1(X, Y):-mujer(X, Y, _);mujer(X, _, Y).
+pareja(X,Y,E):-hombre1(X, E), mujer1(Y, E).

@@ -1,0 +1,6 @@
+%Clasificacion de triangulos
+valido(A,B,C):-A>0,B>0,C>0.
+esTriangulo(A,B,C):-(A+B)>C, (A+C)>B, (C+B)>A.
+esEquilatero(A,B,C,R):-A == B, B == C, R = "Equilatero".
+esEscaleno(A,B,C,R):-A =\= B, A =\= C, A =\= B, R = "Escaleno".
+clasificacionTriangulo(A,B,C,R):-valido(A,B,C), esTriangulo(A,B,C), (esEquilatero(A,B,C,R),!;esEscaleno(A,B,C,R),!; R = "Isosceles").

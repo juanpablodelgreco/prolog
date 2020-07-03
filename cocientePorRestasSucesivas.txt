@@ -1,0 +1,9 @@
+%Cociente por restas sucesivas
+%X->Numero
+%Y->Divisor
+cociente(X,Y,0):-X<Y,!.
+producto(X,Y,C):-X>=Y, Y>0, X1 is X-Y, cociente(X1,Y,C1), C is C1+1.
+
+cocienteYresto(X,Y,0,X):-X<Y,!.
+cocienteYresto(X,X,1,0):-!.
+cocienteYresto(X,Y,C,R):-X1 is X-Y, cocienteYresto(X1,Y,C1,R), C is C1+1.
